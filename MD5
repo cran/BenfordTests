@@ -1,0 +1,17 @@
+1036762e9773a45a0c196c8f1346af78 *BenfordTests-manual.pdf
+6293734497bcb4bcbbb468d00073043b *DESCRIPTION
+df390c53434517b304ac5db487184641 *NAMESPACE
+dd8f4fb20b849334e325fde32e1ded29 *R/Benford_tests.R
+46f914fa218ce9500ac0d4e19e766091 *man/BenfordTests-package.Rd
+56d540c3f8020910c1dfb87c8e6f8650 *man/Chebyshev_dist_benford.Rd
+e9818edfe597cbdb9969f84adbe2951c *man/Euclidean_dist_benford.Rd
+1a31255a092eeba0f0459dbece697ed9 *man/Freedman_Watson_Usquare_benford.Rd
+84ef21e15bf41ca118109a70fa1467f0 *man/J_S_avg_dev_benford.Rd
+449daf15afc1050d32a1faee91a25529 *man/J_stat_squ_benford.Rd
+d479601e289518eeab08287ea5689421 *man/K_S_benford.Rd
+2e37871d561a1e4f68328cf6c1e411f1 *man/chi_square_benford.Rd
+091bc9e052116424cf40575ae5455f3d *man/leading_digits.Rd
+1fc45c3a83464a6769fcae232387803b *man/pbenf.Rd
+399d29ba2b696bf7f69da279795a56a9 *man/qbenf.Rd
+9917d7bcd4c4395e9c827064049b794a *man/rbenf.Rd
+9306d8586eee2b56c8a0ba69bdb294c0 *man/sequence_leading.Rd

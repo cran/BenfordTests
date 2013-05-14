@@ -27,3 +27,8 @@ Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }
 
 \keyword{ distribution }
+
+\examples{
+#show Benford's predictions for the frequencies of the first digit values
+pbenf(1)
+}

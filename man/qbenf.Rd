@@ -27,3 +27,9 @@ Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 \code{\link{pbenf}}; \code{\link{rbenf}}
 }
 \keyword{ distribution }
+
+\examples{
+qbenf(1)
+
+qbenf(1)==cumsum(pbenf(1))
+}

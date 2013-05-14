@@ -11,8 +11,8 @@ for determining if numerical data could conform to Benford's law.
 \tabular{ll}{
 Package: \tab BenfordTests\cr
 Type: \tab Package\cr
-Version: \tab 0.5\cr
-Date: \tab 2013-04-09\cr
+Version: \tab 1.0.0\cr
+Date: \tab 2013-05-14\cr
 License: \tab GPL-3\cr
 }
 \code{BenfordTests} is the implementation of the seven most commonly used goodness-of-fit (GOF) tests to assess if data conforms to Benford's law.
@@ -28,7 +28,6 @@ Tests include:\cr
 \cr
 All tests may be performed using more than one leading digit.
 All tests simulate the specific p-values required for statistical inference, while p-values for the \emph{chi-square} and \emph{D} statistics may also be determined using their asymptotic distributions.
-The package version numbers are indicative of performance and breadth of functions.
 }
 \author{
 Dieter William Joenssen
@@ -65,12 +64,16 @@ Maintainer: Dieter William Joenssen <Dieter.Joenssen@TU-Ilmenau.de>
 \keyword{manip}
 
 \examples{
+#Set the random seed to an arbitrary number
+set.seed(421)
 #Create a sample satisfying Benford's law
 X<-rbenf(n=20)
+#Look at sample
 X
 #Look at the first digits of the sample
-leading_digits(X)
+signifd(X)
 
-#Perform a Chi-squared Test on the sample's first digits 
-chi_square_benford(X)
+#Perform a Chi-squared Test on the sample's first digits using defaults
+chisq.benftest(X)
+#p-value = 0.648
 }

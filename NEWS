@@ -1,0 +1,40 @@
+### changes from version 0.5  to version 1.0 (May 14. 2013)
+- changed names of tests to make them more consistent with nameing in base package:
+			new name			 		|		old name
+			-----------------------------------
+			-chisq.benftest				|	 	chi_square_benford
+				argument: first_digits 	|			argument: digits
+            -ks.benftest				|	 	K_S_benford
+				argument: first_digits 	|			argument: digits
+            -mdist.benftest				|	 	Chebyshev_dist_benford
+				argument: first_digits 	|			argument: digits
+            -edist.benftest				|	 	Euclidean_dist_benford
+				argument: first_digits 	|			argument: digits
+            -usq.benftest				|	 	Freedman_Watson_Usquare_benford
+				argument: first_digits 	|			argument: digits
+            -meandigit.benftest			|	 	J_S_avg_dev_benford
+				argument: first_digits 	|			argument: digits
+            -jpsq.benftest				|	 	J_stat_squ_benford
+				argument: first_digits 	|			argument: digits
+			-signifd					|		leading_digits
+			  argument: number 			|			argument: digits
+			-signifd.seq				|		sequence_leading
+				argument: number 		|			argument: digits
+- removed ability to choose correlation type "kendall" and "spearman" for the jpsq.benftest (old: J_stat_squ_benford)
+	(aleviates some confusion as to what the J_P^2 statistic is, usage of Pearson correlation is most powerfull anyways)
+
+- data name is now correctly printed by the S3 object for all tests.
+
+- meandigit.benftest should have been a two sided test. p-value calculation now reflects this.
+
+- simulation of NULL-hypothesis distribution is now acomplished by c code
+	faster by a very large factor. different for each test
+	Compare the following times on a i5 Pentium laptop for the chi square test
+	##old##
+	> system.time(compute_chisquare_H0_R(n=1000,pvalsims=10000))
+	   user  system elapsed 
+	   207.98    0.06  210.23 
+	##new##
+	> system.time(compute_chisquare_H0(n=1000,pvalsims=10000))
+	   user  system elapsed 
+	   0.37    0.00    0.39 

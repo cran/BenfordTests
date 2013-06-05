@@ -1,9 +1,9 @@
-1e9b1b0f7326f1e0ee7a2e12c2ed6a11 *BenfordTests-manual.pdf
-69b9bfbd444d0ed1a3ac0086586e8055 *DESCRIPTION
+61a5e6cd38e4f8cb0dc0615df30f77f1 *BenfordTests-manual.pdf
+fa8baf7d0d50eb480287b1a8faf54f86 *DESCRIPTION
 7ba3a0465548ce82d319b8f626f2ed7d *NAMESPACE
-9b5eed591a585ca49d1874a5a9ca808f *NEWS
+e174c74ff0dd69925b9ec912a76f52dc *NEWS
 48b10fbe7801d7c63826ab4756d008a4 *R/Benford_tests.R
-1095153d1c7824d5857def68235df808 *man/BenfordTests-package.Rd
+d75fbd24ff08e71be7ea515d595cf894 *man/BenfordTests-package.Rd
 29609465e7ab0d7b2db5b6fb8f92cffa *man/chisq.benftest.Rd
 82605bb26313c0545a027c4f030a063b *man/edist.benftest.Rd
 4d0a09f47b912d53d92496bf00f2fd2f *man/jpsq.benftest.Rd
@@ -16,4 +16,4 @@ e29fcf6d0ecd021bff33b8e203dfb7d4 *man/qbenf.Rd
 7edda15214960551bd77499d870516e5 *man/signifd.Rd
 88e25f1882827b9d9aeb59216351ed33 *man/signifd.seq.Rd
 f362ec1717fb85fd8e7e6020c7983a94 *man/usq.benftest.Rd
-9c347307547870aad73a13b068487601 *src/NULLH_BfT.c
+8fa6df4308a674a746ee80a119661411 *src/NULLH_BfT.c

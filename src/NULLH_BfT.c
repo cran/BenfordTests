@@ -6,7 +6,7 @@
 	Copyright:		Dieter William Joenssen
 	Email:			Dieter.Joenssen@TU-Ilmenau.de
 	Created:		07 May 2013
-	Last Update: 	14 May 2013
+	Last Update: 	05 June 2013
 	Description:	C Translation of R code to calculate the distribution
 					of certain test statistics for Benford's law
 					under the null-hypothesis
@@ -115,6 +115,8 @@ void compute_H0_chi_square(double *H0_chi_square,int *digits ,double *pbenf,doub
       H0_chi_square[i]= compute_chi_square(rpbenf_val,pbenf,n,&combfdigits);
    }
    PutRNGstate();
+   
+   free(rpbenf_val);
 }
 
 
@@ -179,6 +181,7 @@ void compute_H0_KSD(double *H0_KSD,int *digits ,double *pbenf,double *qbenf ,int
       H0_KSD[i]= compute_KSD(rpbenf_val,qbenf,n,&combfdigits);
    }
    PutRNGstate();
+   free(rpbenf_val);
 }
 
 
@@ -227,6 +230,7 @@ void compute_H0_mstar(double *H0_mstar,int *digits ,double *pbenf,double *qbenf 
       H0_mstar[i]= compute_mstar(rpbenf_val,pbenf,n,&combfdigits);
    }
    PutRNGstate();
+   free(rpbenf_val);
 }
 
 
@@ -268,6 +272,7 @@ void compute_H0_dstar(double *H0_dstar,int *digits ,double *pbenf,double *qbenf 
       H0_dstar[i]= compute_dstar(rpbenf_val,pbenf,n,&combfdigits);
    }
    PutRNGstate();
+   free(rpbenf_val);
 }
 
 
@@ -328,6 +333,7 @@ void compute_H0_U_square(double *H0_U_square,int *digits ,double *pbenf,double *
       H0_U_square[i]= compute_U_square(rpbenf_val,qbenf,n,&combfdigits);
    }
    PutRNGstate();
+   free(rpbenf_val);
 }
 
 
@@ -377,6 +383,7 @@ void compute_H0_astar(double *H0_astar,int *digits ,double *pbenf,double *qbenf 
       H0_astar[i]= compute_astar(rpbenf_val,mu_benf,start_digit,n,&combfdigits);
    }
    PutRNGstate();
+   free(rpbenf_val);
 }
 
 
@@ -467,4 +474,5 @@ void compute_H0_J_stat(double *H0_J_stat,int *digits ,double *pbenf,double *qben
       H0_J_stat[i]= compute_J_stat(rpbenf_val,var_benf,pbenf,start_digit,n,&combfdigits);
    }
    PutRNGstate();
+   free(rpbenf_val);
 }

@@ -18,22 +18,28 @@ jpsq.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
   \item{pvalsims}{An integer specifying the number of replicates used if \code{pvalmethod = "simulate"}.}
 }
 \details{
-A statistical test is performed utilizing the sign-preserved squared correlation between \cr\code{signifd(x,digits)} and \code{pbenf(digits)}. \code{x} is a numeric vector of arbitrary length. Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
+A statistical test is performed utilizing the sign-preserved squared correlation between \cr\code{signifd(x,digits)} and \code{pbenf(digits)}.
+Specifically: \deqn{J_P^2=sgn\left(cor\left(f^o, f^e\right)\right)\cdot cor\left(f^o, f^e\right)}
+where \eqn{f^o} denotes the observed frequencys and \eqn{f^e} denotes the expected frequencys of digits \cr \eqn{10^{k-1},10^{k-1}+1,\ldots,10^k-1}.
+\code{x} is a numeric vector of arbitrary length.
+Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
 \code{digits} should be chosen so that \code{signifd(x,digits)} is not influenced by previous rounding.
 }
 \value{
 A list with class "\code{htest}" containing the following components:
-\item{statistic }{the value of the \emph{JP-square} test statistic}
+\item{statistic }{the value of the \eqn{J_P^2} test statistic}
 \item{p.value }{the p-value for the test}
 \item{method }{a character string indicating the type of test performed}
 \item{data.name	}{ a character string giving the name of the data}
 }
 \references{
-Benford F. The law of anomalous numbers. Proceedings of the American Philosophical Society. 1938;78:551-572.\cr
+Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 
-Joenssen DW. A new test for Benford's distribution [abstract]. In: Abstract-proceedings of the 3rd joint Statistical Meeting DAGStat, March 18-22, 2013; Freiburg, Germany.\cr
+Joenssen, D.W. (2013) A New Test for Benford's Distribution. In: \emph{Abstract-Proceedings of the 3rd Joint Statistical Meeting DAGStat, March 18-22, 2013}; Freiburg, Germany.
 
-Shapiro SS, Francia RS. An approximate analysis of variance test for normality. Journal of the American Statistical Association. 1972;67:215-216.\cr
+Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of the ISI World Statistics Congress, 59th Session in Hong Kong}. [available under \url{http://www.statistics.gov.hk/wsc/CPS021-P2-S.pdf}]
+
+Shapiro, S.S. and Francia, R.S. (1972) An Approximate Analysis of Variance Test for Normality. \emph{Journal of the American Statistical Association}. \bold{67}, 215--216.
 
 }
 \author{

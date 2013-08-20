@@ -1,3 +1,13 @@
+### changes from version 1.0.1 to version 1.0.2 (August 20 2013)
+- updated documentation
+	+ equations now included
+	+ references now follow CRAN reccomendations
+	+ references updated
+- fixed meandigit.benftest
+	+ is onesided test, p-value calculation was wrong
+- removed pdf-manual from tarball
+	+ waste of space according to U.Ligges
+
 ### changes from version 1.0.0  to version 1.0.1 (June 05 2013)
 - fixed memory leak associated with NULL-Distribution simulations
 

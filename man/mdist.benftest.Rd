@@ -17,7 +17,11 @@ mdist.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
   \item{pvalsims}{An integer specifying the number of replicates used if \code{pvalmethod = "simulate"}.}
 }
 \details{
-A statistical test is performed utilizing the Chebyshev distance between \code{signifd(x,digits)} and \code{pbenf(digits)}. \code{x} is a numeric vector of arbitrary length. Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
+A statistical test is performed utilizing the Chebyshev distance between \code{signifd(x,digits)} and \code{pbenf(digits)}.
+Specifically: \deqn{m = \max\limits_{i=10^{k-1},\ldots,10^k-1}\left|f_i^o - f_i^e\right|}
+where \eqn{f_i^o} denotes the observed frequency of digits \eqn{i}, and \eqn{f_i^e} denotes the expected frequency of digits \eqn{i}.
+\code{x} is a numeric vector of arbitrary length.
+Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
 \code{digits} should be chosen so that \code{signifd(x,digits)} is not influenced by previous rounding.
 }
 \value{
@@ -28,11 +32,11 @@ A list with class "\code{htest}" containing the following components:
 \item{data.name	}{ a character string giving the name of the data}
 }
 \references{
-Benford F. The law of anomalous numbers. Proceedings of the American Philosophical Society. 1938;78:551-572.\cr
+Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 
-Leemis LM, Schmeiser BW, Evans DL. Survival distributions satisfying Benford's law. The American Statistician. 2000;54(4):236-241.\cr
+Leemis, L.M., Schmeiser, B.W. and Evans, D.L. (2000) Survival Distributions Satisfying Benford's law. \emph{The American Statistician}. \bold{54}, 236--241.
 
-Morrow J. Benford's law, families of distributions and a test basis. 2010. \cr http://www.johnmorrow.info/projects/benford/benfordMain.pdf.
+Morrow, J. (2010) \emph{Benford's Law, Families of Distributions and a Test Basis}. [available under \url{http://www.johnmorrow.info/projects/benford/benfordMain.pdf}]
 }
 \author{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}

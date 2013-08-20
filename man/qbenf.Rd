@@ -18,7 +18,7 @@ qbenf(digits = 1)
 Returns an object of class "\code{table}" containing the expected quantile function of Benford's distribution with a given number of digits.
 }
 \references{
-Benford F. The law of anomalous numbers. Proceedings of the American Philosophical Society. 1938;78:551-572.\cr
+Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 }
 \author{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}

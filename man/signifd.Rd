@@ -1,10 +1,10 @@
 \name{signifd}
 \alias{signifd}
 \title{
-Leading Digits
+First Digits Function
 }
 \description{
-Returns the specified number of significant digits for each element of a given vector.
+Applys the first digits function to each element of a given vector.
 }
 \usage{
 signifd(x = NULL, digits = 1)
@@ -14,13 +14,18 @@ signifd(x = NULL, digits = 1)
   \item{x}{A numeric vector.}
   \item{digits}{An integer determining the number of first digits to use for testing, i.e. 1 for only the first, 2 for the first two etc.}
 }
-\details{
-\code{x} is a numeric vector of arbitrary length. Unlike other solutions, this function will work reliably with all real numbers.
+\details{The first digits function can be writen as:
+\deqn{D_k(x) = \lfloor |x| \cdot 10^{\left( -1 \cdot \lfloor log_{10}|x| \rfloor + k -1 \right)}\rfloor}
+with \eqn{k} being the number of first digits that should be extracted.
+\code{x} is a numeric vector of arbitrary length.
+Unlike other solutions, this function will work reliably with all real numbers.
 }
 \value{
 Returns a vector of integers the same length as the input vector \code{x}.
 }
-
+\references{
+Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of the ISI World Statistics Congress, 59th Session in Hong Kong}. [available under \url{http://www.statistics.gov.hk/wsc/CPS021-P2-S.pdf}]
+}
 \author{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }

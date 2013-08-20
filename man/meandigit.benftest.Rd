@@ -16,20 +16,24 @@ meandigit.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 100
   \item{pvalsims}{An integer specifying the number of replicates used if \code{pvalmethod = "simulate"}.}
 }
 \details{
-A statistical test is performed utilizing the deviation beteen the mean digit of \code{signifd(x,digits)} and \code{pbenf(digits)}. The resulting statistic is normalized to [0,1]. \code{x} is a numeric vector of arbitrary length. Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
+A statistical test is performed utilizing the deviation beteen the mean digit of \code{signifd(x,digits)} and \code{pbenf(digits)}.
+Specifically:\deqn{a^*=\frac{|\mu_k^o-\mu_k^e|}{\left(9\cdot10^{k-1}\right)-\mu_k^e}}
+where \eqn{\mu_k^o} is the observed mean of the chosen \eqn{k} number of digits, and \eqn{\mu_k^e} is the expected/true mean value for Benford's predictions.
+\code{x} is a numeric vector of arbitrary length.
+Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
 \code{digits} should be chosen so that \code{signifd(x,digits)} is not influenced by previous rounding.
 }
 \value{
 A list with class "\code{htest}" containing the following components:
-\item{statistic }{the value of the \emph{a-star} test statistic}
+\item{statistic }{the value of the \eqn{a^*} test statistic}
 \item{p.value }{the p-value for the test}
 \item{method }{a character string indicating the type of test performed}
 \item{data.name	}{ a character string giving the name of the data}
 }
 \references{
-Benford F. The law of anomalous numbers. Proceedings of the American Philosophical Society. 1938;78:551-572.\cr
+Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 
-Judge G, Schechter L. Detecting problems in survey data using Benford's law. Journal of Human Resources. 2009;44:1-24.\cr
+Judge, G. and Schechter, L. (2009) Detecting Problems in Survey Data using Benford's Law. \emph{Journal of Human Resources}. \bold{44}, 1--24.
 }
 \author{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}

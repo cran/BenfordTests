@@ -14,20 +14,26 @@ chisq.benftest(x = NULL, digits = 1, pvalmethod = "asymptotic", pvalsims = 10000
   \item{pvalsims}{An integer specifying the number of replicates to use if \code{pvalmethod = "simulate"}.}
 }
 \details{
-A chi-square goodness-of fit test is performed on \code{signifd(x,digits)} versus \code{pbenf(digits)}. \code{x} is a numeric vector of arbitrary length. Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
+A \eqn{\chi^2} goodness-of-fit test is performed on \code{signifd(x,digits)} versus \code{pbenf(digits)}.
+Specifically: \deqn{\chi^2 = n\cdot\displaystyle\sum_{i=10^{k-1}}^{10^k-1}\frac{\left(f_i^o - f_i^e\right)^2}{f_i^e}}
+where \eqn{f_i^o} denotes the observed frequency of digits \eqn{i}, and \eqn{f_i^e} denotes the expected frequency of digits \eqn{i}.
+\code{x} is a numeric vector of arbitrary length.
+Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
 \code{digits} should be chosen so that \code{signifd(x,digits)} is not influenced by previous rounding.
 }
 \value{
 A list with class "\code{htest}" containing the following components:
-\item{statistic }{the value of the chi-squared test statistic}
+\item{statistic }{the value of the \eqn{\chi^2} test statistic}
 \item{p.value }{the p-value for the test}
 \item{method }{a character string indicating the type of test performed}
 \item{data.name	}{ a character string giving the name of the data}
 }
 \references{
-Benford F. The law of anomalous numbers. Proceedings of the American Philosophical Society. 1938;78:551-572.\cr
+Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 
-Pearson K. On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. Philosophical Magazine Series 5. 1900;50(302):157-175.\cr
+Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of the ISI World Statistics Congress, 59th Session in Hong Kong}. [available under \url{http://www.statistics.gov.hk/wsc/CPS021-P2-S.pdf}]
+
+Pearson, K. (1900) On the Criterion that a Given System of Deviations from the Probable in the Case of a Correlated System of Variables is Such that it can be Reasonably Supposed to have Arisen from Random Sampling. \emph{Philosophical Magazine Series 5}. \bold{50}, 157--175.
 }
 \author{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}

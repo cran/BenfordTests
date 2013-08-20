@@ -15,11 +15,13 @@ rbenf(n)
 }
 }
 
+\details{This distribution has the density:
+\deqn{f\left(x\right)=\frac{1}{x\cdot ln\left(10\right)} \forall x\in[1,10]}}
 \value{
 Returns a random sample with length \code{n} satisfying Benford's law.
 }
 \references{
-Benford F. The law of anomalous numbers. Proceedings of the American Philosophical Society. 1938;78:551-572.\cr
+Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 }
 \author{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}

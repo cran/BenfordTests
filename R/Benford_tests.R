@@ -310,9 +310,9 @@ meandigit.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=1000
       dist_a_star_H0<-compute_astar_H0(n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated a_star value
       pval<-1-sum(dist_a_star_H0<=a_star)/length(dist_a_star_H0)
-	  #this is a two-sided test p_value must be adjusted properly
-	  if(pval>.5){pval<- (1- pval)*2}
-	  else{pval<- pval*2}
+	  #if this were a two-sided test, the p_value would be adjusted as follows:
+	  #if(pval>.5){pval<- (1- pval)*2}
+	  #else{pval<- pval*2}
    }
    
    #make a nice S3 object of type htest

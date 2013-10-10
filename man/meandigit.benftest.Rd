@@ -39,7 +39,7 @@ Judge, G. and Schechter, L. (2009) Detecting Problems in Survey Data using Benfo
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }
 \seealso{
-\code{\link{pbenf}}
+\code{\link{pbenf}}, \code{\link{simulateH0}}
 }
 
 \keyword{ htest }

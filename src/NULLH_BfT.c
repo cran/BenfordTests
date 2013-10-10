@@ -6,7 +6,7 @@
 	Copyright:		Dieter William Joenssen
 	Email:			Dieter.Joenssen@TU-Ilmenau.de
 	Created:		07 May 2013
-	Last Update: 	05 June 2013
+	Last Update: 	09 September 2013
 	Description:	C Translation of R code to calculate the distribution
 					of certain test statistics for Benford's law
 					under the null-hypothesis

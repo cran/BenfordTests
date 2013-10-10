@@ -11,8 +11,8 @@ for determining if numerical data could conform to Benford's law.
 \tabular{ll}{
 Package: \tab BenfordTests\cr
 Type: \tab Package\cr
-Version: \tab 1.0.2\cr
-Date: \tab 2013-08-20\cr
+Version: \tab 1.1.0\cr
+Date: \tab 2013-10-10\cr
 License: \tab GPL-3\cr
 }
 \code{BenfordTests} is the implementation of the seven most commonly used goodness-of-fit (GOF) tests to assess if data conforms to Benford's law.

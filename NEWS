@@ -1,3 +1,12 @@
+### changes from version 1.0.2 to version 1.1.0 (October 10 2013)
+- added new functions (see documentation for details and usage)
+   + signifd.analysis
+   + simulateH0
+- updated documentation
+   + signifd.analysis
+   + simulateH0
+   + functions relying on the former
+
 ### changes from version 1.0.1 to version 1.0.2 (August 20 2013)
 - updated documentation
 	+ equations now included

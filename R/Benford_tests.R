@@ -6,7 +6,7 @@
 #  Copyright:		Dieter William Joenssen
 #  Email:			Dieter.Joenssen@TU-Ilmenau.de
 #  Created:		   16 April 2013
-#  Last Update: 	14 May 2013
+#  Last Update: 	08 October 2013
 #  Description:	R code for Package BenfordTests. Implemented functionions include following:
 #                 Actual Tests:
 #                 -chisq.benftest                  ~ Chi square test for Benford's law
@@ -16,13 +16,14 @@
 #                 -usq.benftest                    ~ Freedman Watson U square test for Benford's law
 #                 -meandigit.benftest              ~ mean digit test for Benford's law
 #                 -jpsq.benftest                   ~ Pearson correlation test for Benford's law (removed moved ability to choose "spearman" and "kendall" for correlation)
+#                 -signifd.analysis                ~ function to (graphically) analyze each digit individualy.
 #                 Supporting functions:
 #                 -signifd                  	   ~ returns the specified number of first significant digits
 #                 -signifd.seq                	   ~ sequence of all possible k first digits(i.e., k=1 -> 1:9)
 #                 -qbenf                           ~ returns full cumulative probability function for Benford's distribution (first k digits)
 #                 -pbenf                           ~ returns full probability function for Benford's distribution (first k digits)
 #                 -rbenf                           ~ generates a random variable that satisfies Benford's law
-
+#                 -simulateH0                      ~ calculates the H0-Distribution of all test statistics via simulation
 ## Tests for Benford's law
 ## Pearson's Chi squared test statistic
 chisq.benftest<-function(x=NULL,digits=1,pvalmethod="asymptotic",pvalsims=10000)
@@ -55,17 +56,8 @@ chisq.benftest<-function(x=NULL,digits=1,pvalmethod="asymptotic",pvalsims=10000)
    if(pvalmethod==2)#calc pval if using the simulated NULL-distribution
    {
    #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_chisquare_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_chi_square<-rep(0,pvalsims)
-         H0_chi_square<- .C("compute_H0_chi_square", H0_chi_square = as.double(H0_chi_square), digits = as.integer(digits),
-                            pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                            n_sim=as.integer(pvalsims))$H0_chi_square
-         return(H0_chi_square)
-      }
-      dist_chisquareH0<-compute_chisquare_H0(n=n,digits=digits,pvalsims=pvalsims)
+   dist_chisquareH0<-simulateH0(teststatistic="chisq",n=n,digits=digits,pvalsims=pvalsims)
+   
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated chi_square value
       pval<-1-sum(dist_chisquareH0<=chi_square)/length(dist_chisquareH0)
    }
@@ -104,17 +96,7 @@ ks.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    if(pvalmethod==1)#calc pval if using the simulated NULL-distribution
    {
    #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_KSD_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_KSD<-rep(0,pvalsims)
-         H0_KSD<- .C("compute_H0_KSD", H0_KSD = as.double(H0_KSD), digits = as.integer(digits),
-                     pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                     n_sim=as.integer(pvalsims))$H0_KSD
-         return(H0_KSD)
-      }
-      dist_K_S_D_H0<-compute_KSD_H0(n=n,digits=digits,pvalsims=pvalsims)
+   dist_K_S_D_H0<-simulateH0(teststatistic="ks",n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated D value
       pval<-1-sum(dist_K_S_D_H0<=K_S_D)/length(dist_K_S_D_H0)
    }
@@ -153,17 +135,7 @@ mdist.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    if(pvalmethod==1)
    {
       #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_mstar_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_mstar<-rep(0,pvalsims)
-         H0_mstar<- .C("compute_H0_mstar", H0_mstar = as.double(H0_mstar), digits = as.integer(digits),
-                       pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                       n_sim=as.integer(pvalsims))$H0_mstar
-         return(H0_mstar)
-      }
-      dist_m_star_H0<-compute_mstar_H0(n=n,digits=digits,pvalsims=pvalsims)
+      dist_m_star_H0<-simulateH0(teststatistic="mdist",n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated m_star value
       pval<-1-sum(dist_m_star_H0<=m_star)/length(dist_m_star_H0)
    }
@@ -202,17 +174,7 @@ edist.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    if(pvalmethod==1)
    {
    #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_dstar_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_dstar<-rep(0,pvalsims)
-         H0_dstar<- .C("compute_H0_dstar", H0_dstar = as.double(H0_dstar), digits = as.integer(digits),
-                       pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                       n_sim=as.integer(pvalsims))$H0_dstar
-         return(H0_dstar)
-      }
-      dist_d_star_H0<-compute_dstar_H0(n=n,digits=digits,pvalsims=pvalsims)
+   dist_d_star_H0<-simulateH0(teststatistic="edist",n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated d_star value
       pval<-1-sum(dist_d_star_H0<=d_star)/length(dist_d_star_H0)
    }
@@ -252,17 +214,7 @@ usq.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    if(pvalmethod==1)
    {
       #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_U_square_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_U_square<-rep(0,pvalsims)
-         H0_U_square<- .C("compute_H0_U_square", H0_U_square = as.double(H0_U_square), digits = as.integer(digits),
-                          pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                          n_sim=as.integer(pvalsims))$H0_U_square
-         return(H0_U_square)
-      }
-      dist_U_square_H0<-compute_U_square_H0(n=n,digits=digits,pvalsims=pvalsims)
+      dist_U_square_H0<-simulateH0(teststatistic="usq",n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated U_square value
       pval<-1-sum(dist_U_square_H0<=U_square)/length(dist_U_square_H0)
    }
@@ -297,17 +249,7 @@ meandigit.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=1000
    if(pvalmethod==1)
    {
          #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_astar_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_astar<-rep(0,pvalsims)
-         H0_astar<- .C("compute_H0_astar", H0_astar = as.double(H0_astar), digits = as.integer(digits),
-                       pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                       n_sim=as.integer(pvalsims))$H0_astar
-         return(H0_astar)
-      }
-      dist_a_star_H0<-compute_astar_H0(n=n,digits=digits,pvalsims=pvalsims)
+         dist_a_star_H0<-simulateH0(teststatistic="meandigit",n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated a_star value
       pval<-1-sum(dist_a_star_H0<=a_star)/length(dist_a_star_H0)
 	  #if this were a two-sided test, the p_value would be adjusted as follows:
@@ -350,17 +292,7 @@ jpsq.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    if(pvalmethod==1)
    {
    #wrapper function for simulating the NULL distribution
-   #this is new in version 1.0.0, calculations are done in c (very fast)
-      compute_J_stat_H0<-function(n=10,digits=1,pvalsims=10)
-      {
-	  #allocate memory
-         H0_J_stat<-rep(0,pvalsims)
-         H0_J_stat<- .C("compute_H0_J_stat", H0_J_stat = as.double(H0_J_stat), digits = as.integer(digits),
-                        pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
-                        n_sim=as.integer(pvalsims))$H0_J_stat
-         return(H0_J_stat)
-      }
-      dist_J_stat_H0<- compute_J_stat_H0(n=n,digits=digits,pvalsims=pvalsims)
+      dist_J_stat_H0<- simulateH0(teststatistic="jpsq",n=n,digits=digits,pvalsims=pvalsims)
 	  #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated J_stat_square value
       pval<-sum(dist_J_stat_H0<=J_stat_squ)/length(dist_J_stat_H0)
    }
@@ -413,5 +345,234 @@ rbenf<-function(n)
    return(10^(runif(n)))
 }
 
+#simulates the H0-Distribution of various tests offered in BenfordTests
+simulateH0<-function(teststatistic="chisq",n=10,digits=1,pvalsims=10)
+{
+   teststatistic<-match.arg(arg = teststatistic, choices = c("chisq","edist","jpsq","ks","mdist","meandigit","usq"), several.ok = FALSE)
+   if(teststatistic=="chisq")
+   {
+      H0_chi_square<-rep(0,pvalsims)
+      H0_chi_square<- .C("compute_H0_chi_square", H0_chi_square = as.double(H0_chi_square), digits = as.integer(digits),
+                         pbenf = as.double(pbenf(digits)),qbenf=as.double(qbenf(digits)),n = as.integer(n),
+                         n_sim=as.integer(pvalsims))$H0_chi_square
+      return(H0_chi_square)
+   }
+   if(teststatistic=="edist")
+   {
+      H0_dstar <- rep(0, pvalsims)
+      H0_dstar <- .C("compute_H0_dstar", H0_dstar = as.double(H0_dstar), 
+                     digits = as.integer(digits), pbenf = as.double(pbenf(digits)), 
+                     qbenf = as.double(qbenf(digits)), n = as.integer(n), 
+                     n_sim = as.integer(pvalsims))$H0_dstar
+      return(H0_dstar)
+   }
+   if(teststatistic=="jpsq")
+   {
+      H0_J_stat <- rep(0, pvalsims)
+      H0_J_stat <- .C("compute_H0_J_stat", H0_J_stat = as.double(H0_J_stat), 
+                      digits = as.integer(digits), pbenf = as.double(pbenf(digits)), 
+                      qbenf = as.double(qbenf(digits)), n = as.integer(n), 
+                      n_sim = as.integer(pvalsims))$H0_J_stat
+      return(H0_J_stat)
+   }
+   if(teststatistic=="ks")
+   {
+      H0_KSD <- rep(0, pvalsims)
+      H0_KSD <- .C("compute_H0_KSD", H0_KSD = as.double(H0_KSD), 
+                   digits = as.integer(digits), pbenf = as.double(pbenf(digits)), 
+                   qbenf = as.double(qbenf(digits)), n = as.integer(n), 
+                   n_sim = as.integer(pvalsims))$H0_KSD
+      return(H0_KSD)
+   }
+   if(teststatistic=="mdist")
+   {
+      H0_mstar <- rep(0, pvalsims)
+      H0_mstar <- .C("compute_H0_mstar", H0_mstar = as.double(H0_mstar), 
+                     digits = as.integer(digits), pbenf = as.double(pbenf(digits)), 
+                     qbenf = as.double(qbenf(digits)), n = as.integer(n), 
+                     n_sim = as.integer(pvalsims))$H0_mstar
+      return(H0_mstar)
+   }
+   if(teststatistic=="meandigit")
+   {
+      H0_astar <- rep(0, pvalsims)
+      H0_astar <- .C("compute_H0_astar", H0_astar = as.double(H0_astar), 
+                     digits = as.integer(digits), pbenf = as.double(pbenf(digits)), 
+                     qbenf = as.double(qbenf(digits)), n = as.integer(n), 
+                     n_sim = as.integer(pvalsims))$H0_astar
+      return(H0_astar)
+   }
+   if(teststatistic=="usq")
+   {
+      H0_U_square <- rep(0, pvalsims)
+      H0_U_square <- .C("compute_H0_U_square", H0_U_square = as.double(H0_U_square), 
+                        digits = as.integer(digits), pbenf = as.double(pbenf(digits)), 
+                        qbenf = as.double(qbenf(digits)), n = as.integer(n), 
+                        n_sim = as.integer(pvalsims))$H0_U_square
+      return(H0_U_square)
+   }
+   
+   
+}
 
-
+#a method for graphically analyzing the first digits. Also gives pvalues for investigating each individual digit
+signifd.analysis<-function(x=NULL,digits=1,graphical_analysis=TRUE,freq=FALSE,alphas=20,tick_col="red",ci_col="darkgreen",ci_lines=c(.05))
+{
+   if(length(alphas)==1)
+   {
+      if(alphas>1)
+      {
+         alphas=seq(from=0,to=.5,length.out=alphas+2)[-c(1,alphas+2)]
+      }
+   }
+   n<-length(x)
+   first_digits<-signifd(x, digits)
+   pdf_benf<-pbenf(digits)
+   
+   
+   freq_of_digits <- table(c(first_digits, signifd.seq(digits))) - 1
+   E_vals<-pdf_benf*n
+   Var_vals<-pdf_benf*n*(1-pdf_benf)
+   Cov_vals<-outer(pdf_benf,pdf_benf)*-1*n
+   diag(Cov_vals)<-Var_vals
+   
+   pval<-rep(0,length(pdf_benf))
+   
+   for(i in 1:length(pval))
+   {
+      pval[i]<-pnorm(q=freq_of_digits[i],mean=E_vals[i],sd=sqrt(Var_vals[i]))
+      if(pval[i]>.5)
+      {pval[i]<- (1- pval[i])*2}else{pval[i]<- pval[i]*2}
+   }
+   
+   if(graphical_analysis)
+   {
+      mids<-seq(from=0,to=1,length.out=length(E_vals)+2)
+      ci_line_length<-(mids[2]-mids[1])*(2/5)
+      mids<-mids[-c(1,length(mids))]
+      ## number formating function
+      numformat <- function(val,trailing=4) { sub("^(-?)0.", "\\1.", sprintf(paste(sep="","%.",trailing,"f"), val)) }
+      trailing<-0
+      
+      
+      ci_cols<-colorRampPalette(colors=c("white",ci_col),interpolate="linear")(length(alphas)+1)[-1]
+      ci_cols<-c(ci_cols,rev(ci_cols))
+      
+      alphas<-c(alphas/2,0.5,rev(1-(alphas/2)))
+      cis<-sapply(alphas,FUN=qnorm,mean=E_vals,sd=sqrt(Var_vals))
+      CIs=t(cis)
+      colnames(CIs)<-signifd.seq(digits)
+      rownames(CIs)<-alphas
+      if(!freq)
+      {
+         cis<-cis/n
+         freq_of_digits<-freq_of_digits/n
+         
+         #if(sum(cis>1)>0){warning("n is small, normal approximation may not be accurate!\nSome confidence intervals > 1.",call.=FALSE)}
+         cis[cis>1]<-1
+         trailing<-4
+      }
+      results<-list(summary=rbind(freq=freq_of_digits,pvals=pval),CIs=CIs)
+      
+      #if(sum(cis<0)>0){warning("n is small, normal approximation may not be accurate!\n Some confidence intervals <0.",call.=FALSE)}
+      cis[cis<0]<-0
+      
+      lr_mid<-cbind(mids-ci_line_length,mids+ci_line_length)
+      
+      
+      plot(x=0,y=0,xlim=c(0,1),ylim=c(0,max(cis)*1.3),type="n",axes=FALSE,xlab="summary",ylab="")
+      for(i in 1:dim(cis)[1])
+      {
+         for(j in 1:(dim(cis)[2]-1))
+         {
+            polygon(x=lr_mid[i,c(1,1,2,2)],y=cis[i,c(j,j+1,j+1,j)],col=ci_cols[j],border=FALSE)
+         }
+      }
+      dim_cis<-dim(cis)
+      dim(cis)<-NULL
+      
+      
+      posy<-seq(from=0,to=max(cis)*1.3,length.out=10)
+      axis(side=2,at=round(posy-5*(10^-(digits+1)),digits),las=1)
+      
+      if(any(ci_lines!=FALSE))
+      {
+         if((!is.logical(ci_lines))&(all(ci_lines<1)&all(ci_lines>0)))
+         {
+            ci_lines<-c(ci_lines/2,0.5,rev(1-(ci_lines/2)))
+            
+            cis<-sapply(ci_lines,FUN=qnorm,mean=E_vals,sd=sqrt(Var_vals))
+            if(!freq)
+            {cis<-cis/n}
+            CIs=t(cis)
+            colnames(CIs)<-signifd.seq(digits)
+            rownames(CIs)<-ci_lines
+            results$CIs<-CIs
+            dim_cis<-dim(cis)
+            dim(cis)<-NULL
+            if(!freq)
+            {cis[cis>1]<-1}
+            cis[cis<0]<-0
+            j<-1
+            for(i in 1:length(cis))
+            {
+               lines(lr_mid[j,],rep(cis[i],2))
+               if(j==dim(lr_mid)[1])
+               {j<-1}
+               else
+               {j<-j+1}
+            }
+         }
+         else
+         {
+            j<-1
+            for(i in 1:length(cis))
+            {
+               lines(lr_mid[j,],rep(cis[i],2))
+               if(j==dim(lr_mid)[1])
+               {j<-1}
+               else
+               {j<-j+1}
+            }
+         }
+      }
+      
+      
+      points(mids,freq_of_digits,col=tick_col,pch=3)
+      if(digits==1)
+      {
+         mtext(c("digit: ",names(E_vals)),side=1,line=0,at=c(-1*ci_line_length,mids))
+         if(freq){mtext(c("freq:  ",numformat(freq_of_digits,trailing)),side=1,line=1,at=c(-1*ci_line_length,mids))}
+         else{mtext(c("rel freq:  ",numformat(freq_of_digits,trailing)),side=1,line=1,at=c(-1*ci_line_length,mids))}
+         
+         mtext(c("pval:  ",numformat(pval)),side=1,line=2,at=c(-1*ci_line_length,mids))
+      }
+      dim(cis)<-dim_cis
+      abline(h=0)
+   }
+   
+   if(!graphical_analysis)
+   {
+      if(any(ci_lines!=FALSE)&(!is.logical(ci_lines))&(all(ci_lines<1)&all(ci_lines>0)))
+      {alphas<-c(ci_lines/2,0.5,rev(1-(ci_lines/2)))}
+      else
+      {alphas<-c(alphas/2,0.5,rev(1-(alphas/2)))}
+      cis<-sapply(alphas,FUN=qnorm,mean=E_vals,sd=sqrt(Var_vals))
+      if(!freq)
+      {
+         cis<-cis/n
+         freq_of_digits<-freq_of_digits/n
+         
+         #if(sum(cis>1)>0){warning("n is small, normal approximation may not be accurate!\nSome confidence intervals > 1.",call.=FALSE)}
+         #cis[cis>1]<-1
+      }
+      #if(sum(cis<0)>0){warning("n is small, normal approximation may not be accurate!\n Some confidence intervals <0.",call.=FALSE)}
+      #cis[cis<0]<-0
+      CIs=t(cis)
+      colnames(CIs)<-signifd.seq(digits)
+      rownames(CIs)<-alphas
+      results<-list(summary=rbind(freq=freq_of_digits,pvals=pval),CIs=CIs)
+      return(results)
+   }
+   return(results)
+}

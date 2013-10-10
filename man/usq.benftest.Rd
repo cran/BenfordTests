@@ -43,7 +43,7 @@ Watson, G.S. (1961) Goodness-of-Fit Tests on a Circle. \emph{Biometrika}. \bold{
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }
 \seealso{
-\code{\link{pbenf}}
+\code{\link{pbenf}}, \code{\link{simulateH0}}
 }
 
 \keyword{ htest }

@@ -46,7 +46,7 @@ Shapiro, S.S. and Francia, R.S. (1972) An Approximate Analysis of Variance Test 
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }
 \seealso{
-\code{\link{pbenf}}
+\code{\link{pbenf}}, \code{\link{simulateH0}}
 }
 
 \keyword{ htest }

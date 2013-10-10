@@ -40,7 +40,7 @@ Kolmogorov, A.N. (1933) Sulla determinazione empirica di una legge di distibuzio
 Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }
 \seealso{
-\code{\link{pbenf}}
+\code{\link{pbenf}}, \code{\link{simulateH0}}
 }
 
 \keyword{ htest }

@@ -11,7 +11,7 @@ chisq.benftest(x = NULL, digits = 1, pvalmethod = "asymptotic", pvalsims = 10000
   \item{x}{A numeric vector.}
   \item{digits}{An integer determining the number of first digits to use for testing, i.e. 1 for only the first, 2 for the first two etc.}
   \item{pvalmethod}{Method used for calculating the p-value. Either \code{"asymptotic"} or \code{"simulate"}.}
-  \item{pvalsims}{An integer specifying the number of replicates to use if \code{pvalmethod = "simulate"}.}
+  \item{pvalsims}{An integer specifying the number of replicates to use if \code{pvalmethod} = "simulate".}
 }
 \details{
 A \eqn{\chi^2} goodness-of-fit test is performed on \code{signifd(x,digits)} versus \code{pbenf(digits)}.
@@ -26,7 +26,7 @@ A list with class "\code{htest}" containing the following components:
 \item{statistic }{the value of the \eqn{\chi^2} test statistic}
 \item{p.value }{the p-value for the test}
 \item{method }{a character string indicating the type of test performed}
-\item{data.name	}{ a character string giving the name of the data}
+\item{data.name }{ a character string giving the name of the data}
 }
 \references{
 Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
@@ -40,7 +40,7 @@ Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
 }
 
 \seealso{
-\code{\link{pbenf}}
+\code{\link{pbenf}}, \code{\link{simulateH0}}
 }
 
 \keyword{htest}

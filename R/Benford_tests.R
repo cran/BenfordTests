@@ -6,7 +6,7 @@
 #  Copyright:		Dieter William Joenssen
 #  Email:			Dieter.Joenssen@TU-Ilmenau.de
 #  Created:		   16 April 2013
-#  Last Update: 	08 October 2013
+#  Last Update: 	04 November 2013
 #  Description:	R code for Package BenfordTests. Implemented functionions include following:
 #                 Actual Tests:
 #                 -chisq.benftest                  ~ Chi square test for Benford's law
@@ -227,11 +227,11 @@ usq.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
 }
 
 #Normed mean deviation test for Benfords distribution first proposed as descriptive test statistic by Judge and Schechter
-meandigit.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
+meandigit.benftest<-function(x=NULL,digits=1,pvalmethod="asymptotic",pvalsims=10000)
 {
 #some self-explanitory error checking
    if(!is.numeric(x)){stop("x must be numeric.")}
-   pvalmethod <- pmatch(pvalmethod, c("simulate"))
+   pvalmethod <- pmatch(pvalmethod, c("asymptotic", "simulate"))
    if (is.na(pvalmethod)){stop("invalid 'pvalmethod' argument")}
    if((length(pvalsims)!=1)){stop("'pvalsims' argument takes only single integer!")}
    if((length(digits)!=1)){stop("'digits' argument takes only single integer!")}
@@ -243,10 +243,17 @@ meandigit.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=1000
    mu_emp<-mean(first_digits)
    #get expected mean digit value under NULL
    mu_bed<-sum(signifd.seq(digits)*pbenf(digits))
+   #get variance of mean digit value under NULL
+   var_bed<-sum(((signifd.seq(digits)-mu_bed)^2)*pbenf(digits))
    #normalize to get a_star
    a_star<-abs(mu_emp-mu_bed)/(max(signifd.seq(digits))-mu_bed)
-         
+   
+   #calc pval if using the asymptotic NULL-distribution
    if(pvalmethod==1)
+   {
+      pval<-(1-pnorm(a_star,mean=0,sd=sqrt(var_bed/n)/(9-mu_bed)))*2
+   }
+   if(pvalmethod==2)
    {
          #wrapper function for simulating the NULL distribution
          dist_a_star_H0<-simulateH0(teststatistic="meandigit",n=n,digits=digits,pvalsims=pvalsims)

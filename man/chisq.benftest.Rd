@@ -1,6 +1,6 @@
 \name{chisq.benftest}
 \alias{chisq.benftest}
-\title{Pearsons's Chi-squared Goodness-of-Fit Test for Benford's Law}
+\title{Pearson's Chi-squared Goodness-of-Fit Test for Benford's Law}
 \description{
 \code{chisq.benftest} takes any numerical vector reduces the sample to the specified number of significant digits and performs Pearson's chi-square goodness-of-fit test to assert if the data conforms to Benford's law.
 }
@@ -26,7 +26,7 @@ A list with class "\code{htest}" containing the following components:
 \item{statistic }{the value of the \eqn{\chi^2} test statistic}
 \item{p.value }{the p-value for the test}
 \item{method }{a character string indicating the type of test performed}
-\item{data.name }{ a character string giving the name of the data}
+\item{data.name }{a character string giving the name of the data}
 }
 \references{
 Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.

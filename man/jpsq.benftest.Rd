@@ -20,7 +20,7 @@ jpsq.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
 \details{
 A statistical test is performed utilizing the sign-preserved squared correlation between \cr\code{signifd(x,digits)} and \code{pbenf(digits)}.
 Specifically: \deqn{J_P^2=sgn\left(cor\left(f^o, f^e\right)\right)\cdot cor\left(f^o, f^e\right)}
-where \eqn{f^o} denotes the observed frequencys and \eqn{f^e} denotes the expected frequencys of digits \cr \eqn{10^{k-1},10^{k-1}+1,\ldots,10^k-1}.
+where \eqn{f^o} denotes the observed frequencies and \eqn{f^e} denotes the expected frequency of digits \cr \eqn{10^{k-1},10^{k-1}+1,\ldots,10^k-1}.
 \code{x} is a numeric vector of arbitrary length.
 Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
 \code{digits} should be chosen so that \code{signifd(x,digits)} is not influenced by previous rounding.

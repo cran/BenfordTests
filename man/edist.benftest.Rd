@@ -26,7 +26,7 @@ A list with class "\code{htest}" containing the following components:
 \item{statistic }{the value of the Euclidean distance test statistic}
 \item{p.value }{the p-value for the test}
 \item{method }{a character string indicating the type of test performed}
-\item{data.name	}{ a character string giving the name of the data}
+\item{data.name }{ a character string giving the name of the data}
 }
 \references{
 Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.

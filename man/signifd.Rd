@@ -4,7 +4,7 @@
 First Digits Function
 }
 \description{
-Applys the first digits function to each element of a given vector.
+Applies the first digits function to each element of a given vector.
 }
 \usage{
 signifd(x = NULL, digits = 1)
@@ -14,7 +14,7 @@ signifd(x = NULL, digits = 1)
   \item{x}{A numeric vector.}
   \item{digits}{An integer determining the number of first digits to use for testing, i.e. 1 for only the first, 2 for the first two etc.}
 }
-\details{The first digits function can be writen as:
+\details{The first digits function can be written as:
 \deqn{D_k(x) = \lfloor |x| \cdot 10^{\left( -1 \cdot \lfloor log_{10}|x| \rfloor + k -1 \right)}\rfloor}
 with \eqn{k} being the number of first digits that should be extracted.
 \code{x} is a numeric vector of arbitrary length.

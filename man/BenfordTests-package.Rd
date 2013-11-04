@@ -11,8 +11,8 @@ for determining if numerical data could conform to Benford's law.
 \tabular{ll}{
 Package: \tab BenfordTests\cr
 Type: \tab Package\cr
-Version: \tab 1.1.0\cr
-Date: \tab 2013-10-10\cr
+Version: \tab 1.1.1\cr
+Date: \tab 2013-11-04\cr
 License: \tab GPL-3\cr
 }
 \code{BenfordTests} is the implementation of the seven most commonly used goodness-of-fit (GOF) tests to assess if data conforms to Benford's law.
@@ -27,7 +27,7 @@ Tests include:\cr
 	Joenssen's \eqn{J_P^2} statistic, a Shapiro-Francia type correlation test (Shapiro and Francia (1972))\cr
 \cr
 All tests may be performed using more than one leading digit.
-All tests simulate the specific p-values required for statistical inference, while p-values for the \eqn{\chi^2} and \emph{D} statistics may also be determined using their asymptotic distributions.
+All tests simulate the specific p-values required for statistical inference, while p-values for the \eqn{\chi^2}, \emph{D}, and \eqn{a^*} statistics may also be determined using their asymptotic distributions.
 }
 \author{
 Dieter William Joenssen

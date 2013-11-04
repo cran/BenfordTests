@@ -1,3 +1,10 @@
+### changes from version 1.1.0 to version 1.1.1 (November 04 2013)
+- meandigit.benftest
+   + Added asymptotic distribution
+   + "asymptotic" new default "pvalmethod"
+- Spell checked :D
+   + News
+   + Documentation
 ### changes from version 1.0.2 to version 1.1.0 (October 10 2013)
 - added new functions (see documentation for details and usage)
    + signifd.analysis
@@ -10,10 +17,10 @@
 ### changes from version 1.0.1 to version 1.0.2 (August 20 2013)
 - updated documentation
 	+ equations now included
-	+ references now follow CRAN reccomendations
+	+ references now follow CRAN recommendations
 	+ references updated
 - fixed meandigit.benftest
-	+ is onesided test, p-value calculation was wrong
+	+ is one-sided test, p-value calculation was wrong
 - removed pdf-manual from tarball
 	+ waste of space according to U.Ligges
 
@@ -21,7 +28,7 @@
 - fixed memory leak associated with NULL-Distribution simulations
 
 ### changes from version 0.5  to version 1.0 (May 14 2013)
-- changed names of tests to make them more consistent with nameing in base package:
+- changed names of tests to make them more consistent with naming in base package:
 	new name			|	old name
 	----------------------------------------------------------------------
 	-chisq.benftest			|	chi_square_benford
@@ -43,13 +50,13 @@
 	-signifd.seq			|	sequence_leading
 		argument: number	|		argument: digits
 - removed ability to choose correlation type "kendall" and "spearman" for the jpsq.benftest (old: J_stat_squ_benford)
-	(aleviates some confusion as to what the J_P^2 statistic is, usage of Pearson correlation is most powerfull anyways)
+	(alleviates some confusion as to what the J_P^2 statistic is, usage of Pearson correlation is most powerful anyways)
 
 - data name is now correctly printed by the S3 object for all tests.
 
 - meandigit.benftest should have been a two sided test. p-value calculation now reflects this.
 
-- simulation of NULL-hypothesis distribution is now acomplished by c code
+- simulation of NULL-hypothesis distribution is now accomplished by c code
 	faster by a very large factor. different for each test
 	Compare the following times on a i5 Pentium laptop for the chi square test
 	##old##

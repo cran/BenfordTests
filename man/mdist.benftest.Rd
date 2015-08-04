@@ -18,7 +18,7 @@ mdist.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
 }
 \details{
 A statistical test is performed utilizing the Chebyshev distance between \code{signifd(x,digits)} and \code{pbenf(digits)}.
-Specifically: \deqn{m = \max\limits_{i=10^{k-1},\ldots,10^k-1}\left|f_i^o - f_i^e\right|}
+Specifically: \deqn{m = \max\limits_{i=10^{k-1},\ldots,10^k-1}\left|f_i^o - f_i^e\right|\cdot\sqrt{n}}
 where \eqn{f_i^o} denotes the observed frequency of digits \eqn{i}, and \eqn{f_i^e} denotes the expected frequency of digits \eqn{i}.
 \code{x} is a numeric vector of arbitrary length.
 Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
@@ -39,7 +39,7 @@ Leemis, L.M., Schmeiser, B.W. and Evans, D.L. (2000) Survival Distributions Sati
 Morrow, J. (2010) \emph{Benford's Law, Families of Distributions and a Test Basis}. [available under \url{http://www.johnmorrow.info/projects/benford/benfordMain.pdf}]
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 
 \seealso{

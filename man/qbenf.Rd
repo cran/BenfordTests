@@ -21,7 +21,7 @@ Returns an object of class "\code{table}" containing the expected quantile funct
 Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the American Philosophical Society}. \bold{78}, 551--572.
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{pbenf}}; \code{\link{rbenf}}

@@ -2,37 +2,38 @@
 \alias{BenfordTests-package}
 \alias{BenfordTests}
 \docType{package}
-\title{Statistical Tests for Benford's Law.}
+\title{Statistical Tests for Benford's Law}
 \description{
-This package contains seven specialized statistical tests and support functions
+This package contains several specialized statistical tests and support functions
 for determining if numerical data could conform to Benford's law.
 }
 \details{
 \tabular{ll}{
 Package: \tab BenfordTests\cr
 Type: \tab Package\cr
-Version: \tab 1.1.1\cr
-Date: \tab 2013-11-04\cr
+Version: \tab 1.2.0\cr
+Date: \tab 2015-07-18\cr
 License: \tab GPL-3\cr
 }
-\code{BenfordTests} is the implementation of the seven most commonly used goodness-of-fit (GOF) tests to assess if data conforms to Benford's law.
+\code{BenfordTests} is the implementation of eight goodness-of-fit (GOF) tests to assess if data conforms to Benford's law.
 \cr
 Tests include:\cr
-	Pearson \eqn{\chi^2} statistic (Pearson (1900))\cr
-	Kolmogorov-Smirnov \emph{D} statistic (Kolmogorov (1933))\cr
-	Freedman's modification of Watson's \eqn{U^2} statistic (Freedman (1981), Watson (1961))\cr
-	Chebyshev distance \emph{m} statistic (Leemis (2000))\cr
-	Euclidean distance \emph{d} statistic (Cho and Gaines (2007))\cr
-	Judge-Schechter mean deviation \eqn{a^*} statistic (Judge and Schechter (2009))\cr
-	Joenssen's \eqn{J_P^2} statistic, a Shapiro-Francia type correlation test (Shapiro and Francia (1972))\cr
+	Pearson \eqn{\chi^2} statistic (Pearson, 1900)\cr
+	Kolmogorov-Smirnov \emph{D} statistic (Kolmogorov, 1933)\cr
+	Freedman's modification of Watson's \eqn{U^2} statistic (Freedman, 1981; Watson, 1961)\cr
+	Chebyshev distance \emph{m} statistic (Leemis, 2000)\cr
+	Euclidean distance \emph{d} statistic (Cho and Gaines, 2007)\cr
+	Judge-Schechter mean deviation \eqn{a^*} statistic (Judge and Schechter, 2009)\cr
+	Joenssen's \eqn{J_P^2} statistic, a Shapiro-Francia type correlation test (Shapiro and Francia, 1972)\cr
+   Joint Digit Test \eqn{T^2} statistic, a Hotelling type test (Hotelling, 1931)\cr
 \cr
 All tests may be performed using more than one leading digit.
-All tests simulate the specific p-values required for statistical inference, while p-values for the \eqn{\chi^2}, \emph{D}, and \eqn{a^*} statistics may also be determined using their asymptotic distributions.
+All tests simulate the specific p-values required for statistical inference, while p-values for the \eqn{\chi^2}, \emph{D}, \eqn{a^*}, and \eqn{T^2} statistics may also be determined using their asymptotic distributions.
 }
 \author{
 Dieter William Joenssen
 
-Maintainer: Dieter William Joenssen <Dieter.Joenssen@TU-Ilmenau.de>
+Maintainer: Dieter William Joenssen <Dieter.Joenssen@googlemail.com>
 }
 \references{
  
@@ -58,6 +59,7 @@ Maintainer: Dieter William Joenssen <Dieter.Joenssen@TU-Ilmenau.de>
  
  Watson, G.S. (1961) Goodness-of-Fit Tests on a Circle. \emph{Biometrika}. \bold{48}, 109--114.
 
+ Hotelling, H. (1931). The generalization of Student's ratio. \emph{Annals of Mathematical Statistics}. \bold{2}, 360--378.
  }
 
 \keyword{package}

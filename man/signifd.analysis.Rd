@@ -35,7 +35,7 @@ Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the Americ
 Freedman, L.S. (1981) Watson's Un2 Statistic for a Discrete Distribution. \emph{Biometrika}. \bold{68}, 708--711.
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{pbenf}}

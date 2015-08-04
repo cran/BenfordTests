@@ -36,7 +36,7 @@ Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of 
 Pearson, K. (1900) On the Criterion that a Given System of Deviations from the Probable in the Case of a Correlated System of Variables is Such that it can be Reasonably Supposed to have Arisen from Random Sampling. \emph{Philosophical Magazine Series 5}. \bold{50}, 157--175.
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 
 \seealso{

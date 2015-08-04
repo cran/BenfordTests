@@ -19,7 +19,7 @@ jpsq.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
 }
 \details{
 A statistical test is performed utilizing the sign-preserved squared correlation between \cr\code{signifd(x,digits)} and \code{pbenf(digits)}.
-Specifically: \deqn{J_P^2=sgn\left(cor\left(f^o, f^e\right)\right)\cdot cor\left(f^o, f^e\right)}
+Specifically: \deqn{J_P^2=sgn\left(cor\left(f^o, f^e\right)\right)\cdot cor\left(f^o, f^e\right) ^2}
 where \eqn{f^o} denotes the observed frequencies and \eqn{f^e} denotes the expected frequency of digits \cr \eqn{10^{k-1},10^{k-1}+1,\ldots,10^k-1}.
 \code{x} is a numeric vector of arbitrary length.
 Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
@@ -43,7 +43,7 @@ Shapiro, S.S. and Francia, R.S. (1972) An Approximate Analysis of Variance Test 
 
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{pbenf}}, \code{\link{simulateH0}}

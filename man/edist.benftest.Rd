@@ -15,7 +15,7 @@ edist.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
 }
 \details{
 A statistical test is performed utilizing the Euclidean distance between \code{signifd(x,digits)} and \code{pbenf(digits)}.
-Specifically: \deqn{d = \sqrt{\displaystyle\sum_{i=10^{k-1}}^{10^k-1}\left(f_i^o - f_i^e\right)^2}}
+Specifically: \deqn{d = \sqrt{n}\cdot \sqrt{\displaystyle\sum_{i=10^{k-1}}^{10^k-1}\left(f_i^o - f_i^e\right)^2}}
 where \eqn{f_i^o} denotes the observed frequency of digits \eqn{i}, and \eqn{f_i^e} denotes the expected frequency of digits \eqn{i}.
 \code{x} is a numeric vector of arbitrary length.
 Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
@@ -37,7 +37,7 @@ Morrow, J. (2010) \emph{Benford's Law, Families of Distributions and a Test Basi
 
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 
 \seealso{

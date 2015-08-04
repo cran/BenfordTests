@@ -19,7 +19,7 @@ Returns an integer vector.
 }
 
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 
 \examples{

@@ -37,7 +37,7 @@ Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of 
 Kolmogorov, A.N. (1933) Sulla determinazione empirica di una legge di distibuzione. \emph{Giornale dell'Istituto Italiano degli Attuari}. \bold{4}, 83--91.
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{pbenf}}, \code{\link{simulateH0}}

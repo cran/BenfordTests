@@ -17,7 +17,7 @@ usq.benftest(x = NULL, digits = 1, pvalmethod = "simulate", pvalsims = 10000)
 }
 \details{
 A Freedman-Watson test for discreet distributions is performed between \code{signifd(x,digits)} and \code{pbenf(digits)}.
-Specifically:\deqn{U^2 = \frac{n}{9\cdot 10^{k-1}-1}\cdot\left[ \displaystyle\sum_{i={10^{k-1}}}^{10^{k}-2}(f_i^o - f_i^e)^2 - \frac{1}{9\cdot 10^{k-1}-1}\cdot\left(\displaystyle\sum_{i={10^{k-1}}}^{10^{k}-2}(f_i^o - f_i^e)\right)^2\right]
+Specifically:\deqn{U^2 = \frac{n}{9\cdot 10^{k-1}}\cdot\left[ \displaystyle\sum_{i={10^{k-1}}}^{10^{k}-2}\left( \displaystyle\sum_{j=1}^{i}(f_j^o - f_j^e) \right)^2 - \frac{1}{9\cdot 10^{k-1}}\cdot\left(\displaystyle\sum_{i={10^{k-1}}}^{10^{k}-2}\displaystyle\sum_{j=1}^{i}(f_i^o - f_i^e)\right)^2\right]
 }
 where \eqn{f_i^o} denotes the observed frequency of digits \eqn{i}, and \eqn{f_i^e} denotes the expected frequency of digits \eqn{i}.
 \code{x} is a numeric vector of arbitrary length. Values of \code{x} should be continuous, as dictated by theory, but may also be integers.
@@ -40,7 +40,7 @@ Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of 
 Watson, G.S. (1961) Goodness-of-Fit Tests on a Circle. \emph{Biometrika}. \bold{48}, 109--114.
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{pbenf}}, \code{\link{simulateH0}}

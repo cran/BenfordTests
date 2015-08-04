@@ -6,7 +6,7 @@
 #  Copyright:		Dieter William Joenssen
 #  Email:			Dieter.Joenssen@TU-Ilmenau.de
 #  Created:		   16 April 2013
-#  Last Update: 	04 November 2013
+#  Last Update: 	16 July 2015
 #  Description:	R code for Package BenfordTests. Implemented functionions include following:
 #                 Actual Tests:
 #                 -chisq.benftest                  ~ Chi square test for Benford's law
@@ -17,6 +17,7 @@
 #                 -meandigit.benftest              ~ mean digit test for Benford's law
 #                 -jpsq.benftest                   ~ Pearson correlation test for Benford's law (removed moved ability to choose "spearman" and "kendall" for correlation)
 #                 -signifd.analysis                ~ function to (graphically) analyze each digit individualy.
+#                 -jointdigit.benftest             ~ function to test all digit frequencies jointly
 #                 Supporting functions:
 #                 -signifd                  	   ~ returns the specified number of first significant digits
 #                 -signifd.seq                	   ~ sequence of all possible k first digits(i.e., k=1 -> 1:9)
@@ -207,7 +208,7 @@ usq.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    rel_freq_of_digits_H0<-pbenf(digits)
    
    #calculate deviations betwen the cumulative sums
-   cum_sum_Ds<-cumsum(rel_freq_of_digits)-cumsum(rel_freq_of_digits_H0)
+   cum_sum_Ds<-cumsum(rel_freq_of_digits-rel_freq_of_digits_H0)
    #calculate the U^2 test statistic
    U_square<-(n/length(rel_freq_of_digits))*(sum(cum_sum_Ds^2)-((sum(cum_sum_Ds)^2)/length(rel_freq_of_digits)))
    
@@ -310,6 +311,124 @@ jpsq.benftest<-function(x=NULL,digits=1,pvalmethod="simulate",pvalsims=10000)
    class(RVAL) <- "htest"
    return(RVAL)
 }
+
+# Hotelling type test for Benford's distribution first proposed by Joenssen (2015)
+jointdigit.benftest<-function(x = NULL, digits = 1, eigenvalues="all", tol = 1e-15, pvalmethod = "asymptotic", pvalsims = 10000)
+{
+   #some self-explanitory error checking
+   if(!is.numeric(x)){stop("x must be numeric.")}
+   pvalmethod <- pmatch(pvalmethod, c("asymptotic"))#, "simulate"
+   if (is.na(pvalmethod)){stop("invalid 'pvalmethod' argument")}
+   if((length(pvalsims)!=1)){stop("'pvalsims' argument takes only single integer!")}
+   if((length(digits)!=1)){stop("'digits' argument takes only single integer!")}
+   #Might need this in the future
+   decompose=TRUE
+   
+   #reduce the data to the specified number of first digits
+   first_digits<-signifd(x,digits)
+   #get the amount of values that should be tested
+   n<-length(first_digits)
+   #the the observed frequencies of all digits
+   freq_of_digits<-table(c(first_digits,signifd.seq(digits)))-1
+   #calculate the relative frequencies
+   rel_freq_of_digits<-freq_of_digits/n
+   #get the expected frequencies under the NULL
+   rel_freq_of_digits_H0<-pbenf(digits)
+   
+   #calculate covariance matrix under the NULL
+   covariance_matirx<-outer(rel_freq_of_digits_H0,rel_freq_of_digits_H0,"*")*-1
+   diag(covariance_matirx)<-rel_freq_of_digits_H0*(1-rel_freq_of_digits_H0)
+   #ignore multiplication by n b/c only eigenvectors are desired
+   #covariance_matirx<-covariance_matirx*n
+   if(decompose)
+   {
+      eigenval_vect<-eigen(covariance_matirx,symmetric = TRUE)
+      eigenval_vect_result<-eigenval_vect
+      # identify which eigenvalues = 0
+      eigen_to_keep<-abs(eigenval_vect$values)>tol
+      #toss out the eigenvalues... = 0;
+      eigenval_vect$values<-eigenval_vect$values[eigen_to_keep]
+      eigenval_vect$vectors<-eigenval_vect$vectors[,eigen_to_keep]
+      
+      #determine which nonzero eigenvalues to keep
+      if(length(eigenvalues)>0)
+      {
+         if(is.character(eigenvalues))
+         {
+            if(length(eigenvalues)==1)
+            {
+               eigenvalues <- pmatch(tolower(eigenvalues), c("all","kaiser"))
+               if(eigenvalues == 1)
+               {
+                  eigen_to_keep<-1:length(eigenval_vect$values)
+               }
+               if(eigenvalues == 2)
+               {
+                  eigen_to_keep<-which(eigenval_vect$values>=mean(eigenval_vect$values))
+               }
+            }
+            else
+            {stop("Error: 'is.character(eigenvalues) && length(eigenvalues)!=1', use only one string!")}
+         }
+         else
+         {
+            if(is.numeric(eigenvalues)&all(eigenvalues>=0,na.rm = TRUE))
+            {
+               eigen_to_keep<-eigenvalues[!is.na(eigenvalues)]
+               eigen_to_keep<-eigen_to_keep[eigen_to_keep<=length(eigenval_vect$values)]
+               if(length(eigen_to_keep)<=0)
+               {stop("Error: No eigenvalues remain.")}
+            }
+            else
+            {stop("Error: non string value for eigenvalues must numeric vector of eigenvalue indexes! No negative indexing allowed.")}
+         }
+      }else{stop("Error: 'length(eigenvalues)<=0'!")}
+      
+      
+      #reduce to selected eigenvalues;
+      eigenval_vect$values<-eigenval_vect$values[eigen_to_keep]
+      eigenval_vect$vectors<-eigenval_vect$vectors[,eigen_to_keep]
+      
+      principle_components<-rel_freq_of_digits%*%eigenval_vect$vectors
+      true_components_means<-rel_freq_of_digits_H0%*%eigenval_vect$vectors
+      
+      if(length(eigenval_vect$values)==1)
+      {
+         hotelling_T<-(n/eigenval_vect$values)*((principle_components-true_components_means)^2)
+      }else{
+         hotelling_T<-n*(principle_components-true_components_means)%*%solve(diag(eigenval_vect$values))%*%t(principle_components-true_components_means)
+      }
+      deg_free<-length(principle_components)
+   }else{
+      hotelling_T<-n*(rel_freq_of_digits-rel_freq_of_digits_H0)%*%solve(covariance_matirx)%*%t(rel_freq_of_digits-rel_freq_of_digits_H0)
+      deg_free<-length(rel_freq_of_digits)
+   }
+   
+   #calc pval if using the asymptotic NULL-distribution
+   if(pvalmethod==1)
+   {
+      #pval<-pchisq(q = hotelling_T,df = length(principle_components))
+      pval<-1-pchisq(q = hotelling_T,df = deg_free)
+   }
+   if(pvalmethod==2)#calc pval if using the simulated NULL-distribution
+   {
+      #Reserved for when implemented
+      #wrapper function for simulating the NULL distribution
+      #dist_chisquareH0<-simulateH0(teststatistic="chisq",n=n,digits=digits,pvalsims=pvalsims)
+      
+      #calculate pvalue by determeninge the amount of values in the NULL-distribution that are larger than the calculated chi_square value
+      #pval<-1-sum(dist_chisquareH0<=chi_square)/length(dist_chisquareH0)
+   }
+   
+   
+   #make a nice S3 object of type htest
+   RVAL <- list(statistic = c(Tsquare = hotelling_T), p.value = pval, method = "Joint Digits Test", 
+                data.name = deparse(substitute(x)),eigenvalues_tested=eigen_to_keep,eigen_val_vect=eigenval_vect_result)
+   class(RVAL) <- "htest"
+   return(RVAL)
+}
+
+
 
 ### Aditional functions provided
 ## returns first "digits" significant digits of numerical vector x

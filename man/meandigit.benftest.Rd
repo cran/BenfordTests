@@ -38,7 +38,7 @@ Benford, F. (1938) The Law of Anomalous Numbers. \emph{Proceedings of the Americ
 Judge, G. and Schechter, L. (2009) Detecting Problems in Survey Data using Benford's Law. \emph{Journal of Human Resources}. \bold{44}, 1--24.
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{pbenf}}, \code{\link{simulateH0}}

@@ -1,3 +1,14 @@
+### changes from version 1.1.2 to version 1.2.0 (August 4 2015)
+- new test!
+   + jointdigit.benftest
+### changes from version 1.1.1 to version 1.1.2 (June 29 2015)
+- updated documentation
+   + new maintainer email
+   + formulas in edist.benftest and usq.benftest fixed
+     (Thanks: S. van der Meer)
+- tweaked for improved speed
+   + jpsq.benftest
+   + usq.benftest
 ### changes from version 1.1.0 to version 1.1.1 (November 04 2013)
 - meandigit.benftest
    + Added asymptotic distribution
@@ -29,26 +40,26 @@
 
 ### changes from version 0.5  to version 1.0 (May 14 2013)
 - changed names of tests to make them more consistent with naming in base package:
-	new name			|	old name
+	new name			            |	old name
 	----------------------------------------------------------------------
-	-chisq.benftest			|	chi_square_benford
+	-chisq.benftest			   |	chi_square_benford
 		argument: first_digits	|		argument: digits
-	-ks.benftest			|	K_S_benford
+	-ks.benftest			      |	K_S_benford
 		argument: first_digits	|		argument: digits
-	-mdist.benftest			|	Chebyshev_dist_benford
+	-mdist.benftest			   |	Chebyshev_dist_benford
 		argument: first_digits	|		argument: digits
-	-edist.benftest			|	Euclidean_dist_benford
+	-edist.benftest			   |	Euclidean_dist_benford
 		argument: first_digits	|		argument: digits
-	-usq.benftest			|	Freedman_Watson_Usquare_benford
+	-usq.benftest			      |	Freedman_Watson_Usquare_benford
 		argument: first_digits 	|		argument: digits
-	-meandigit.benftest		|	J_S_avg_dev_benford
+	-meandigit.benftest		   |	J_S_avg_dev_benford
 		argument: first_digits	|		argument: digits
-	-jpsq.benftest			|	J_stat_squ_benford
+	-jpsq.benftest			      |	J_stat_squ_benford
 		argument: first_digits	|		argument: digits
-	-signifd			|	leading_digits
-		argument: number	|		argument: digits
-	-signifd.seq			|	sequence_leading
-		argument: number	|		argument: digits
+	-signifd			            |	leading_digits
+		argument: number	      |		argument: digits
+	-signifd.seq			      |	sequence_leading
+		argument: number	      |		argument: digits
 - removed ability to choose correlation type "kendall" and "spearman" for the jpsq.benftest (old: J_stat_squ_benford)
 	(alleviates some confusion as to what the J_P^2 statistic is, usage of Pearson correlation is most powerful anyways)
 

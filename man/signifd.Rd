@@ -27,7 +27,7 @@ Returns a vector of integers the same length as the input vector \code{x}.
 Joenssen, D.W. (2013) Two Digit Testing for Benford's Law. \emph{Proceedings of the ISI World Statistics Congress, 59th Session in Hong Kong}. [available under \url{http://www.statistics.gov.hk/wsc/CPS021-P2-S.pdf}]
 }
 \author{
-Dieter William Joenssen \email{Dieter.Joenssen@TU-Ilmenau.de}
+Dieter William Joenssen \email{Dieter.Joenssen@googlemail.com}
 }
 \seealso{
 \code{\link{chisq.benftest}}; \code{\link{ks.benftest}}; \code{\link{usq.benftest}}; \code{\link{mdist.benftest}}; \code{\link{edist.benftest}}; \code{\link{meandigit.benftest}}; \code{\link{jpsq.benftest}}

@@ -1,15 +1,15 @@
 /*
 	Do not delete!
 	File name		NULLH_BfT.c
-	Part of:		BenfordTests (GNU R contributed package)
+	Part of:		   BenfordTests (GNU R contributed package)
 	Author:			Dieter William Joenssen
 	Copyright:		Dieter William Joenssen
 	Email:			Dieter.Joenssen@TU-Ilmenau.de
-	Created:		07 May 2013
-	Last Update: 	09 September 2013
+	Created:		   07 May 2013
+	Last Update: 	16 July 2015
 	Description:	C Translation of R code to calculate the distribution
-					of certain test statistics for Benford's law
-					under the null-hypothesis
+					   of certain test statistics for Benford's law
+					   under the null-hypothesis
 */
 #include <R.h>
 #include <Rmath.h>
@@ -280,6 +280,10 @@ void compute_H0_dstar(double *H0_dstar,int *digits ,double *pbenf,double *qbenf 
 double compute_U_square(double *f_obs, double *q_exp, int *n, int *length_f)
 {
    int i;
+   double nodigit;
+   
+   nodigit = length_f[0];
+   
    //make f_obs the cum sums of f_obs
    // disregarding the last one b/C allways = 1
    for(i = 1;i< length_f[0];i++)
@@ -303,12 +307,14 @@ double compute_U_square(double *f_obs, double *q_exp, int *n, int *length_f)
       //printf("sum_of_squares = %f\n",sum_of_squares);
       square_of_sums = square_of_sums + f_obs[i];
       //printf("square_of_sums = %f\n",square_of_sums);
-   }   
-   square_of_sums = (square_of_sums*square_of_sums)/((double)length_f[0]);
+   }
+   sum_of_squares = sum_of_squares * nodigit;
+   square_of_sums = square_of_sums*square_of_sums;
+   
    //printf("sum_of_squares = %f\n",sum_of_squares);
    //printf("square_of_sums = %f\n",square_of_sums);
    //printf("n[0]/(length_f[0]) = %f\n",(double)n[0]/((double)length_f[0]));
-   U_square = ((double)n[0]/((double)length_f[0]))*(sum_of_squares-square_of_sums);
+   U_square = ((double)n[0]/(nodigit * nodigit)) * (sum_of_squares-square_of_sums);
    //printf("U_square = %f\n",U_square);
    return(U_square);
 }
@@ -395,6 +401,7 @@ double compute_J_stat(double *f_obs, double var_benf, double *pbenf_cent, int st
    double var_emp=0.0;
    double corr_val =0.0;
    double J_stat;
+   double lenfless = (double)(length_f[0]-1);
    
    //compute empirical mean of frequencies
    for(i=0;i<length_f[0];i++)
@@ -413,15 +420,15 @@ double compute_J_stat(double *f_obs, double var_benf, double *pbenf_cent, int st
    {
       var_emp = var_emp + (f_obs[i]*f_obs[i]);
    }
-   var_emp = var_emp/(double)(length_f[0]-1);
+   
    //calculate empirical covariance
    for(i=0;i<length_f[0];i++)
    {
       corr_val = corr_val + (f_obs[i]*pbenf_cent[i]);
    }
    //calculate correlation
-   corr_val = corr_val/(double)(length_f[0]-1);
-   corr_val = corr_val/sqrt(var_benf*var_emp);
+   corr_val = corr_val/ sqrt(lenfless*var_benf*var_emp);
+
    if(corr_val<0)
    {J_stat=-1;}
    else
